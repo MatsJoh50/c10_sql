@@ -104,7 +104,7 @@ INSERT INTO bookstore.inventory (store_id, isbn, amount) VALUES (3, 978031605330
 INSERT INTO bookstore.inventory (store_id, isbn, amount) VALUES (4, 9780442281492, 10);  -- Starship Troopers
 INSERT INTO bookstore.inventory (store_id, isbn, amount) VALUES (4, 9780441013593, 5);   -- Stranger in a Strange Land
 
-
+-- Skapa View
 CREATE VIEW total_author_book_value AS
 SELECT
     CONCAT(author.first_name, ' ', author.last_name) AS name,
@@ -117,5 +117,22 @@ FROM
         LEFT JOIN bookstore.inventory i ON b.isbn = i.isbn
 GROUP BY author.id;
 
-select name as n, age as a, book_title_count as btc, inventory_value as iv
-from total_author_book_value
+-- Testa View
+SELECT name AS n, age AS a, book_title_count AS btc, inventory_value AS iv
+FROM total_author_book_value;
+
+# SELECT * FROM total_author_book_value LIMIT 1;
+
+
+-- Användare och Behörightere
+CREATE ROLE IF NOT EXISTS 'admin';
+CREATE ROLE IF NOT EXISTS 'developer';
+
+GRANT CREATE, DROP, ALTER, INSERT, UPDATE, DELETE, SELECT ON bookstore.* TO 'developer';
+GRANT INSERT,SELECT, UPDATE, DELETE ON bookstore.* TO 'admin';
+
+CREATE USER 'NotHackableAdmin'@'localhost';
+CREATE USER 'TenExDev'@'localhost';
+
+GRANT 'admin' TO 'NotHackableAdmin'@'localhost';
+GRANT 'developer' TO 'TenExDev'@'localhost';
