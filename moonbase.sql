@@ -28,10 +28,6 @@
 # WHERE launch_date >= '2010-01-01';
 
 -- Uppgift 5:
-## 5. Gör en SELECT för att ta ut samtliga rader och kolumner från tabellen “account”, men slå ihop
-## ‘first_name’ och ‘last_name’ till en ny kolumn ‘name’, samt lägg till en extra kolumn ‘gender’ som
-## du ger värdet ‘female’ för alla användare vars näst sista siffra i personnumret är jämn, och värdet
-## ‘male’ för de användare där siffran är udda.
 
 # ALTER TABLE account
 # ADD gender VARCHAR(255);
